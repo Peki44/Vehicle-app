@@ -1,0 +1,11 @@
+.cars{
+    display: flex;
+    justify-content: center;
+}
+.items{
+    width: 76%;
+    margin: 50px 0 40px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}

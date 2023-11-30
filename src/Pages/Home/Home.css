@@ -1,0 +1,17 @@
+.home{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 65px 0;
+    /* background: linear-gradient(180deg, #6495ED 0%, rgba(144, 182, 251, 0.75) 100%); */
+}
+.title{
+    font-size: 50px;
+    width: 25%;
+}
+.secondParagraph{
+    font-size: 40px;
+}
+img{
+    width: 340px;
+}
