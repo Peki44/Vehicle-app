@@ -1,14 +1,16 @@
 import React from 'react'
-import Form from '../../Components/Form/Form'
 import form from '../../Utils/form';
 import "./Register.css";
+import RegisterForm from '../../Components/RegisterForm/RegisterForm';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
-var whichForm=false;
 
 function Register() {
   return (
     <div className="registerForm">
-        <Form form={form} open={whichForm}/>
+        <RegisterForm form={form}/>
+        <ToastContainer/>
     </div>
   )
 }

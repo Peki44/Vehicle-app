@@ -31,24 +31,24 @@ ul{
 .underline{
     border-bottom: solid black;
 }
-.loginButton{
+.authButtons{
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.loginButton a{
+.authButtons a{
     color: black;
     text-decoration: none;
     font-weight: 500;
     font-size: 15px;
 }
-.loginButton button{
+.authButtons button{
     width: 90px;
     height: 35px;
     outline: none;
     border-radius: 60px;
     margin: 0 5px;
 }
-.loginButton button:active{
+.authButtons button:active{
     background-color: gray ;
 }

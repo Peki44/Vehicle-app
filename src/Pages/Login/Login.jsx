@@ -1,14 +1,15 @@
 import React from 'react'
-import Form from '../../Components/Form/Form'
 import form from '../../Utils/form';
 import "./Login.css";
+import LoginForm from '../../Components/LoginForm/LoginForm';
+import { ToastContainer } from 'react-toastify';
 
-var whichForm=true;
 
 function Login() {
   return (
     <div className="loginForm">
-        <Form form={form} open={whichForm}/>
+        <LoginForm form={form}/>
+        <ToastContainer/>
     </div>
   )
 }

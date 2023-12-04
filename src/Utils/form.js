@@ -22,7 +22,7 @@ const fields = [
   {
     name: "passwordConfirm",
     placeholder: "Confirm Password",
-    rules: "required|string|same:password",
+    rules: "required|string|between:5,25",
     type: "password",
   },
   {
