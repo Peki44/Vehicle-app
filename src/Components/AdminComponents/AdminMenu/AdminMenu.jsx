@@ -5,13 +5,10 @@ import "./AdminMenu.css";
 function AdminMenu() {
   return (
     <div className="menu">
-        {/* <div className="menu-item">
-            <Link>View Products</Link>
-        </div>
-        <div className="menu-item">
-            <Link>Add Products</Link>
-        </div> */}
         <h2>Admin Menu</h2>
+        <Link to="/viewbrands" className="menu-item">
+            <span>View brands</span>
+        </Link>
         <Link to="/addbrandform" className="menu-item">
             <span>Add brand</span>
         </Link>

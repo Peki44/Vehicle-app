@@ -8,6 +8,7 @@ import Register from './Pages/Register/Register';
 import AddProducts from './Pages/AdminPages/AddProducts/AddProducts';
 import ViewProducts from './Pages/AdminPages/ViewProducts/ViewProducts';
 import AddBrand from './Pages/AdminPages/AddBrand/AddBrand';
+import ViewBrands from './Pages/AdminPages/ViewBrands/ViewBrands';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/addbrandform" element={<AddBrand/>}/> 
             <Route path="/addproducts" element={<AddProducts/>}/>
             <Route path="/viewproducts" element={<ViewProducts/>}/>                       
+            <Route path="/viewbrands" element={<ViewBrands/>}/>  
           </Routes>
         <Footer/>
       </BrowserRouter>

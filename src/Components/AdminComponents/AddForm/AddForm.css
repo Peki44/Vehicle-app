@@ -36,3 +36,16 @@
     font-weight: 300;
     margin-top: 10px;
 }
+select{
+    border: 1px solid black;
+    background-color: rgba(252, 252, 252, 0.2);
+    width: 530px;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 10px auto 0;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    color: black;
+    font-weight: 300;
+}

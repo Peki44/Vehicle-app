@@ -62,7 +62,7 @@ function Header(){
                 {authStore.user && (<><h3>Welcome {userName}</h3><button onClick={handleLogout}><Link to="/login">Logout</Link></button></>)}
                 {!authStore.user && (<>
                     <button onClick={()=>{setMenu("login")}} className={menu==="login" && " "}><Link to="/login">Login</Link></button>
-                    <button><Link to="/register">Register</Link></button></>)}
+                    <button onClick={()=>{setMenu("register")}} className={menu==="register" && " "}><Link to="/register">Register</Link></button></>)}
             </div>
         </header>
     );

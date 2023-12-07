@@ -49,6 +49,12 @@ const fields = [
     rules: "required|string",
     type: "text",
   },
+  {
+    name: "selectedBrand",
+    label: 'Select Brand',
+    rules: "required|string",
+    type: "text",
+  },
 ];
 
 const hooks = {
