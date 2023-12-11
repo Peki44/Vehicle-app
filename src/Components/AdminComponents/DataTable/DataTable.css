@@ -1,6 +1,14 @@
+.box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .dataGrid{
     margin-top: 30px;
     padding: 20px;
+}
+.titleProducts{
+    margin-left: 320px;
 }
 .avatar{
     width: 45px;
@@ -15,9 +23,11 @@
 .action>*{
     font-size: 20px;
 }
-.edit{
+.edit a{
     color: green;
+    text-decoration: none;
 }
 .delete{
     color: red;
+    cursor: pointer;
 }

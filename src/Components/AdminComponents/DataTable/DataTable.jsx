@@ -5,34 +5,52 @@ import { FaRegEdit } from "react-icons/fa";
 import { IoTrashBinSharp } from "react-icons/io5";
 import { Box } from "@mui/material";
 import firebaseService from "../../../Services/firebaseService";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function DataTable() {
 
     const[rows,setRows]=useState([]);
+    const navigate=useNavigate();
+
+    const fetchData = async () => {
+      try {
+        const models = await firebaseService.getAllModels();
+        console.log("this is", models)
+        const brands = await firebaseService.getAllBrands();
+        const brandsMap = {};
+        brands.forEach((make) => {
+          brandsMap[make.id] = make;
+        });
+        const updatedRows = models.map((model) => ({
+          ...model,
+          MakeId: brandsMap[model.MakeId]?.Brand,
+        }));
+
+        setRows(updatedRows);
+      } catch (error) {
+        console.error('Error fetching brands:', error);
+      }
+    };
 
     useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const models = await firebaseService.getAllModels();
-          console.log("this is", models)
-          const brands = await firebaseService.getAllBrands();
-          const brandsMap = {};
-          brands.forEach((make) => {
-            brandsMap[make.id] = make;
-          });
-          const updatedRows = models.map((model) => ({
-            ...model,
-            MakeId: brandsMap[model.MakeId]?.Brand,
-          }));
-  
-          setRows(updatedRows);
-        } catch (error) {
-          console.error('Error fetching brands:', error);
-        }
-      };
-  
       fetchData();
     }, []);
+    
+    const handleEdit = async (model) => {
+      navigate(`/editModels/${encodeURIComponent(JSON.stringify(model))}`)
+    };
+
+    const handleDelete = async (id) => {
+      try {
+        await firebaseService.deleteModels(id);
+        fetchData();
+        console.log('Product successfully deleted!');
+        toast.success("Product successfully deleted!")
+      } catch (error) {
+        console.error('Error deleting product: ', error);
+      }
+    };
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 150 },
@@ -62,8 +80,8 @@ function DataTable() {
         { field: 'actions', headerName: 'Actions', width: 100,
             renderCell:(params)=>{
                 return <div className="action">
-                    <div className="edit"><FaRegEdit /></div>
-                    <div className="delete"><IoTrashBinSharp /></div>
+                    <div className="edit"><Link to={`/editModels/${encodeURIComponent(JSON.stringify(params.row))}`}><FaRegEdit onClick={() => handleEdit(params.row)}/></Link></div>
+                    <div className="delete"><IoTrashBinSharp onClick={()=>handleDelete(params.row.id)} /></div>
                 </div>
             }
         },
@@ -71,20 +89,21 @@ function DataTable() {
       
   return (
     <Box sx={{ height: 420, width: '50%' }}>
-    <DataGrid
-    className="dataGrid"
-    rows={rows}
-    columns={columns}
-    initialState={{
-      pagination: {
-        paginationModel: {
-          pageSize: 5,
+      <h2 className="titleProducts">Products</h2>
+      <DataGrid
+      className="dataGrid"
+      rows={rows}
+      columns={columns}
+      initialState={{
+        pagination: {
+          paginationModel: {
+            pageSize: 5,
+          },
         },
-      },
-    }}
-    pageSizeOptions={[5]}
-    disableRowSelectionOnClick
-  />
+      }}
+      pageSizeOptions={[5]}
+      disableRowSelectionOnClick
+    />
   </Box>
   )
 }

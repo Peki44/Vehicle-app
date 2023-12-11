@@ -1,4 +1,4 @@
-/* .addForm{
+.addBrandForm{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,7 +7,7 @@
     background-color: white;
     margin: 30px 0 0 150px;
 }
-.addForm input {
+.addBrandForm input {
     border: 1px solid black;
     background-color: rgba(252, 252, 252, 0.2);
     width: 500px;
@@ -20,19 +20,27 @@
     color: black;
     font-weight: 300;
 }
-.addForm label{
+.addBrandForm label{
     font-size: 18px;
     color: black;
     font-weight: 500;
 }
-.addForm button{
+.addBrandForm button{
     background-color:green;
     padding: 10px 15px;
     color: white;
     width: 200px;
-    border: 0;
+    border: 2px solid green;
     border-radius: 5px;
     font-size: 18px;
     font-weight: 300;
     margin-top: 10px;
-} */
+    margin-left: 160px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.addBrandForm button:hover{
+    background-color: white;
+    color: #04AA6D;
+    border: 2px solid #04AA6D;
+}

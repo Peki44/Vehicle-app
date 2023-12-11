@@ -9,14 +9,14 @@ import AddProducts from './Pages/AdminPages/AddProducts/AddProducts';
 import ViewProducts from './Pages/AdminPages/ViewProducts/ViewProducts';
 import AddBrand from './Pages/AdminPages/AddBrand/AddBrand';
 import ViewBrands from './Pages/AdminPages/ViewBrands/ViewBrands';
+import EditBrand from './Pages/AdminPages/EditBrand/EditBrand';
+import EditProducts from './Pages/AdminPages/EditProducts/EditProducts';
 
 function App() {
   return (
     <div className="App">
     <BrowserRouter>
         <Header/>
-        {/* <AddProducts/> */}
-        {/* <ViewProducts/> */}
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/cars" element={<Cars/>}/>
@@ -24,8 +24,10 @@ function App() {
             <Route path="/register" element={<Register/>}/>
             <Route path="/addbrandform" element={<AddBrand/>}/> 
             <Route path="/addproducts" element={<AddProducts/>}/>
-            <Route path="/viewproducts" element={<ViewProducts/>}/>                       
-            <Route path="/viewbrands" element={<ViewBrands/>}/>  
+            <Route path="/viewproducts" element={<ViewProducts/>}/>
+              <Route path="/editModels/:model" element={<EditProducts/>}/>                         
+            <Route path="/viewbrands" element={<ViewBrands/>}/>
+              <Route path="/editBrands/:brand" element={<EditBrand/>}/>  
           </Routes>
         <Footer/>
       </BrowserRouter>

@@ -43,6 +43,13 @@ class DataStore {
       console.error('Error adding vehicle model:', error);
     }
   }
+  async deleteVehicleModel(model){
+    try {
+        await firebaseService.deleteModels(model);
+      } catch (error) {
+        console.error('Error adding vehicle model:', error);
+      }
+  }
 //   async fetchModels() {
 //     try {
 //         const models = await firebaseService.getAllModels();
