@@ -68,9 +68,11 @@ class AuthStore{
           const userCredential = await signInWithEmailAndPassword(auth,this.email, this.password);
           this.setUser(userCredential.user);
           console.log(this.user.displayName);
-          if(this.user.uid==="Jqie51680LV0A1WUZD6ochpKazZ2"){
+          if(this.user.uid==="dUtpNSzSgRc8PMmmoO6XV5dnXQL2"){
             this.setAdmin(true);
           }
+          /////////////////// email for admin pernarmatej@gmail.com
+          /////////////////// password: 123456
           toast.success("Login succes")
           this.email="";
           this.password="";
