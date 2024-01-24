@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
-import firebaseService from '../../../Services/firebaseService';
+import brandsService from '../../../Services/brandsService';
+import modelsService from '../../../Services/modelsService';
 
 const EditForm=observer(({form, model})=>{
 
@@ -11,7 +12,7 @@ const EditForm=observer(({form, model})=>{
     const fetchBrandData = async () => {
       try {
         setInitialData(model);
-        setBrands(await firebaseService.getAllBrands());
+        setBrands(await brandsService.getAllBrands());
       } catch (error) {
         console.error('Error fetching brand data:', error);
       }
@@ -27,7 +28,7 @@ const EditForm=observer(({form, model})=>{
       Name:form.$('productName').value,
       Price:form.$('productPrice').value,
     };
-    await firebaseService.updateModel(model.id, updatedData);
+    await modelsService.updateModel(model.id, updatedData);
     form.clear();
   };
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
-import firebaseService from '../../../Services/firebaseService';
+import brandsService from '../../../Services/brandsService';
 
 const EditBrandForm = observer(({ form, brand }) => {
   const [initialData, setInitialData] = useState({});
@@ -23,7 +23,7 @@ const EditBrandForm = observer(({ form, brand }) => {
       Brand: form.$('productBrand').value,
       Abrv: form.$('productBrand').value.charAt(0),
     };
-    await firebaseService.updateBrand(brand.id, updatedData);
+    await brandsService.updateBrand(brand.id, updatedData);
     form.clear();
     // onClose(); // Close the modal or form after editing
   };

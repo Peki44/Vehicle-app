@@ -4,7 +4,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Box } from "@mui/material";
 import { FaRegEdit } from "react-icons/fa";
 import { IoTrashBinSharp } from "react-icons/io5";
-import firebaseService from "../../../Services/firebaseService";
+import brandsService from "../../../Services/brandsService";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -15,7 +15,7 @@ function BrandTable() {
 
     const fetchData = async () => {
       try {
-        const brands = await firebaseService.getAllBrands();
+        const brands = await brandsService.getAllBrands();
         setRows(brands);
       } catch (error) {
         console.error('Error fetching brands:', error);
@@ -32,7 +32,7 @@ function BrandTable() {
 
     const handleDelete = async (id) => {
       try {
-        await firebaseService.deleteBrands(id);
+        await brandsService.deleteBrands(id);
         fetchData();
         console.log('Brand successfully deleted!');
         toast.success("Brand successfully deleted!")

@@ -34,7 +34,7 @@ const fields = [
   {
     name: "productPrice",
     label: 'Product Price',
-    rules: "required|string",
+    rules: "required|numeric",
     type: "text",
   },
   {

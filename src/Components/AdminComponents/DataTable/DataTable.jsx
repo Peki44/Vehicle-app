@@ -4,9 +4,10 @@ import { DataGrid } from '@mui/x-data-grid';
 import { FaRegEdit } from "react-icons/fa";
 import { IoTrashBinSharp } from "react-icons/io5";
 import { Box } from "@mui/material";
-import firebaseService from "../../../Services/firebaseService";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import brandsService from '../../../Services/brandsService';
+import modelsService from '../../../Services/modelsService';
 
 function DataTable() {
 
@@ -15,9 +16,9 @@ function DataTable() {
 
     const fetchData = async () => {
       try {
-        const models = await firebaseService.getAllModels();
-        console.log("this is", models)
-        const brands = await firebaseService.getAllBrands();
+        const models = await modelsService.getAllModels();
+        //console.log("this is", models)
+        const brands = await brandsService.getAllBrands();
         const brandsMap = {};
         brands.forEach((make) => {
           brandsMap[make.id] = make;
@@ -43,7 +44,7 @@ function DataTable() {
 
     const handleDelete = async (id) => {
       try {
-        await firebaseService.deleteModels(id);
+        await modelsService.deleteModels(id);
         fetchData();
         console.log('Product successfully deleted!');
         toast.success("Product successfully deleted!")

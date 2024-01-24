@@ -1,5 +1,6 @@
 import { makeObservable, observable, action } from 'mobx';
-import firebaseService from '../Services/firebaseService';
+import brandsService from '../Services/brandsService';
+import modelsService from '../Services/modelsService';
 
 class DataStore {
   brands = [];
@@ -22,15 +23,15 @@ class DataStore {
 
   async addBrand(vehicleMake){
     try{
-        await firebaseService.addBrand(vehicleMake);
+        await brandsService.addBrand(vehicleMake);
     }catch (error) {
         console.error('Error submitting form:', error);
     }
   }
   async fetchBrands() {
     try {
-      const brands = await firebaseService.getAllBrands();
-      console.log('Fetched vehicle makes:', brands);
+      const brands = await brandsService.getAllBrands();
+      // console.log('Fetched vehicle makes:', brands);
       this.setVehicleMakes(brands);
     } catch (error) {
       console.error('Error fetching vehicle makes:', error);
@@ -38,21 +39,21 @@ class DataStore {
   }
   async addVehicleModel(productData) {
     try {
-      await firebaseService.addVehicleModel(productData);
+      await modelsService.addVehicleModel(productData);
     } catch (error) {
       console.error('Error adding vehicle model:', error);
     }
   }
   async deleteVehicleModel(model){
     try {
-        await firebaseService.deleteModels(model);
+        await modelsService.deleteModels(model);
       } catch (error) {
         console.error('Error adding vehicle model:', error);
       }
   }
 //   async fetchModels() {
 //     try {
-//         const models = await firebaseService.getAllModels();
+//         const models = await modelsService.getAllModels();
 //         console.log('Fetched vehicle models:', models);
 //         this.setVehicleModels(models);
 //       } catch (error) {

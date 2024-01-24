@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import Item from '../../Components/Item/Item';
 import "./Cars.css";
-import firebaseService from '../../Services/firebaseService';
 import Pagination from '../../Components/Pagination/Pagination';
+import brandsService from '../../Services/brandsService';
+import modelsService from '../../Services/modelsService';
 
 function Cars() {
 
-  const[rows,setRows]=useState([]);
   const[brandNames,setBrandNames]=useState([]);
+  const[totalPosts, setTotalPosts] = useState(0);
   const[currentPage,setCurrentPage]=useState(1);
-  const[postsPerPage,setPostsPerPage]=useState(6);
-  const[productData,setData]=useState([]);
+  const[productData,setProductData]=useState([]);
   const[sortOption, setSortOption] = useState('');
   const[brandOption,setBrandOption]=useState('');
 
-  const lastPostIndex=currentPage*postsPerPage;
-  const firstPostIndex=lastPostIndex-postsPerPage;
+  const postsPerPage=6;
 
   const fetchData = async () => {
     try {
-      setBrandNames(await firebaseService.getAllBrands());
-      const models = await firebaseService.getAllModels();
-      const brands=await firebaseService.getAllBrands();
+      setBrandNames(await brandsService.getAllBrands());
+      const models = await modelsService.getPaginatedModels(currentPage, postsPerPage,sortOption,brandOption);
+      const totalCount = await modelsService.getModelsCount();
+      const brands=await brandsService.getAllBrands();
       const brandsMap = {};
       brands.forEach((make) => {
         brandsMap[make.id] = make;
@@ -31,50 +31,24 @@ function Cars() {
         MakeId: brandsMap[model.MakeId]?.Brand,
       }));
 
-      setRows(updatedRows);
-      setData(rows.slice(firstPostIndex,lastPostIndex));
-
+      setProductData(updatedRows);
+      setTotalPosts(totalCount);
     } catch (error) {
       console.error('Error fetching brands:', error);
     }
   };
 
-  const sortData = (data) => {
-    if (sortOption === 'nameAsc') {
-      const sortedByName = data.slice().sort((a, b) => a.MakeId.localeCompare(b.MakeId));
-      setData(sortedByName);
-    }else if(sortOption === 'nameDes'){
-      const sortedByName = data.slice().sort((a, b) => b.MakeId.localeCompare(a.MakeId));
-      setData(sortedByName);
-    }else if (sortOption === 'priceLow') {
-      const sortedByPrice = data.slice().sort((a, b) => a.Price - b.Price);
-      setData(sortedByPrice);
-    }else if (sortOption === 'priceHigh') {
-      const sortedByPrice = data.slice().sort((a, b) => b.Price-a.Price);
-      setData(sortedByPrice);
-    }else{
-      setData(data);
-    }
-  };
-  
-  const filterData = (data) => {
-    const filteredRows = brandOption ? data.filter((row) => row.MakeId === brandOption): data;
-    setData(filteredRows)
-  }
-
   useEffect(() => {
      fetchData();  
-     filterData(productData);
-     sortData(productData);
-  }, [rows]);
+
+  }, [currentPage,sortOption,brandOption]);
 
 
   const handleSortChange = (event) => {
     setSortOption(event.target.value);
-  };
+  }
   const handleFilterChange =(event)=>{
     setBrandOption(event.target.value);
-
   }
 
   return (
@@ -85,7 +59,7 @@ function Cars() {
             <select value={brandOption} onChange={handleFilterChange}>
               <option value=""> Select Brand </option>
               {brandNames.map((brand) => (
-                <option key={brand.id} value={brand.Brand}>
+                <option key={brand.id} value={brand.id}>
                   {brand.Brand}
                 </option>
               ))}
@@ -94,7 +68,7 @@ function Cars() {
          <div>
             <label>Sort by: </label>
             <select value={sortOption} onChange={handleSortChange}>
-              <option>Select</option>
+              <option value="select">Select</option>
               <option value="nameAsc">Name: asc</option>
               <option value="nameDes">Name: des</option>
               <option value="priceLow">Price: low to high</option>
@@ -117,7 +91,7 @@ function Cars() {
         </div>
       </div>
          <Pagination 
-              totalPosts={rows.length}
+              totalPosts={totalPosts}
               postsPerPage={postsPerPage}
               setCurrentPage={setCurrentPage}
               currentPage={currentPage} />

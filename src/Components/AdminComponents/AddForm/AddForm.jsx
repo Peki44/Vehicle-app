@@ -16,7 +16,7 @@ const AddForm=observer(({form})=>{
       const productData={
         MakeId:form.$('selectedBrand').value,
         Name:form.$('productName').value,
-        Price:form.$('productPrice').value,
+        Price:Number(form.$('productPrice').value),
       }
       await dataStore.addVehicleModel(productData);
       form.reset();

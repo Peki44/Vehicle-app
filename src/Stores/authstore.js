@@ -68,7 +68,7 @@ class AuthStore{
           const userCredential = await signInWithEmailAndPassword(auth,this.email, this.password);
           this.setUser(userCredential.user);
           console.log(this.user.displayName);
-          if(this.user.uid==="Jqie51680LV0A1WUZD6ochpKazZ2"){
+          if(this.user.uid==="9g7JOepIw7Su3bNHPUiycvpRhCt2"){
             this.setAdmin(true);
           }
           /////////////////// email for admin pernarmatej@gmail.com
